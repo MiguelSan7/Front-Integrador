@@ -10,13 +10,19 @@ import { LoginService } from './service/login.service';
 import { CookieService } from 'ngx-cookie-service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CunasComponent } from './cunas/cunas.component';
+import { CrudFormComponent } from './crud-form/crud-form.component';
+import { CunasListComponent } from './cunas-list/cunas-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    CunasComponent,
+    CrudFormComponent,
+    CunasListComponent
   ],
   imports: [
     BrowserModule,

@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private apiUrl = 'http://127.0.0.1:3333';
+  private apiUrl = environment.apiUrl;
 
   constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) { }
 
