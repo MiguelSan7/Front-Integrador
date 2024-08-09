@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Editar Cuna</h2>
+  <form (ngSubmit)="onSubmit()" #cunaForm="ngForm">
+    <div class="mb-4">
+      <label for="numserie" class="block text-gray-700">Número de Serie:</label>
+      <input
+        type="text"
+        id="numserie"
+        name="numserie"
+        [(ngModel)]="cuna.numserie"
+        required
+        maxlength="5"
+        class="border rounded px-3 py-2 w-full"
+      />
+      <div *ngIf="cunaForm.form.controls['numserie']?.errors?.['maxlength']" class="text-red-500 text-sm mt-1">
+        El número de serie no puede tener más de 5 caracteres.
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="apodo" class="block text-gray-700">Apodo:</label>
+      <input
+        type="text"
+        id="apodo"
+        name="apodo"
+        disabled="true"
+        [(ngModel)]="cuna.apodo"
+        required
+        class="border rounded px-3 py-2 w-full"
+      />
+      <div *ngIf="cunaForm.form.controls['apodo']?.errors?.['required']" class="text-red-500 text-sm mt-1">
+        El apodo es obligatorio.
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="bg-blue-500 text-white px-4 py-2 rounded-md"
+      [disabled]="!cunaForm.form.valid"
+    >
+      Actualizar
+    </button>
+    <div *ngIf="errorMessages.length > 0" class="text-red-500 mt-4">
+      <div *ngFor="let message of errorMessages">{{ message }}</div>
+    </div>
+  </form>
+</div>

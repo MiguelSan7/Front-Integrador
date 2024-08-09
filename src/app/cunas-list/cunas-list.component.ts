@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CunasService } from '../service/cunas.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CunasService } from '../service/cunas.service';
 export class CunasListComponent implements OnInit {
   cunas: any[] = []; // Array para almacenar las cunas
 
-  constructor(private cunasService: CunasService) {}
+  constructor(private cunasService: CunasService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadCunas(); // Cargar las cunas al inicializar el componente
@@ -21,14 +22,19 @@ export class CunasListComponent implements OnInit {
         this.cunas = data;
       },
       (error) => {
-        console.error('Error al obtener las cunas', error);
+        if (error.status === 401) {
+          console.error('No autorizado: por favor inicie sesión de nuevo.');
+          // Redirigir al usuario a la página de login
+          this.router.navigate(['/login']);
+        } else {
+          console.error('Error al obtener las cunas', error);
+        }
       }
     );
   }
 
   editCuna(cuna: any): void {
-    console.log('Editar cuna:', cuna);
-    // Aquí iría la lógica para navegar a un formulario de edición
+    this.router.navigate(['/cunas/edit', cuna.id]);
   }
 
   deleteCuna(id: string): void {
@@ -37,7 +43,13 @@ export class CunasListComponent implements OnInit {
         this.cunas = this.cunas.filter(c => c.id !== id); // Eliminar del array local
       },
       (error) => {
-        console.error('Error al eliminar la cuna', error);
+        if (error.status === 401) {
+          console.error('No autorizado: por favor inicie sesión de nuevo.');
+          // Redirigir al usuario a la página de login
+          this.router.navigate(['/login']);
+        } else {
+          console.error('Error al eliminar la cuna', error);
+        }
       }
     );
   }

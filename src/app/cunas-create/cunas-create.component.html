@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Crear Cuna</h2>
+  <form (ngSubmit)="onSubmit()" #cunaForm="ngForm">
+    <div class="mb-4">
+      <label for="numserie" class="block text-gray-700">Número de Serie:</label>
+      <input
+        type="text"
+        id="numserie"
+        name="numserie"
+        [(ngModel)]="cuna.numserie"
+        required
+        class="border rounded px-3 py-2 w-full"
+      />
+      <div *ngIf="cunaForm.controls['numserie']?.errors?.['required'] && cunaForm.controls['numserie']?.touched">
+        <small class="text-red-500">Número de serie es requerido.</small>
+      </div>
+      <div *ngIf="cunaForm.controls['numserie']?.errors?.['maxlength'] && cunaForm.controls['numserie']?.touched">
+        <small class="text-red-500">El número de serie debe tener un máximo de 5 caracteres.</small>
+      </div>
+    </div>
+    <div *ngIf="errorMessages.length > 0" class="mb-4">
+      <div *ngFor="let errorMsg of errorMessages" class="text-red-500">
+        {{ errorMsg }}
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="bg-blue-500 text-white px-4 py-2 rounded-md"
+      [disabled]="!cunaForm.form.valid"
+    >
+      Crear
+    </button>
+  </form>
+</div>

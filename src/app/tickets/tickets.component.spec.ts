@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CrudFormComponent } from './crud-form.component';
+import { TicketComponent } from './tickets.component';
 
-describe('CrudFormComponent', () => {
-  let component: CrudFormComponent;
-  let fixture: ComponentFixture<CrudFormComponent>;
+describe('TicketsComponent', () => {
+  let component: TicketComponent;
+  let fixture: ComponentFixture<TicketComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CrudFormComponent ]
+      declarations: [ TicketComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CrudFormComponent);
+    fixture = TestBed.createComponent(TicketComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
