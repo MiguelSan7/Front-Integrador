@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
     const isLoginRoute = state.url === '/login';
 
     if (isLoggedIn && isLoginRoute) {
-      this.router.navigate(['/dashboard']); // Redirige al dashboard si está logueado e intenta acceder al login
+      this.router.navigate(['/dashboard']);
       return false;
     }
 

@@ -10,10 +10,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   
+  
   loginForm: FormGroup;
   verificationForm: FormGroup;
   isVerificationStage: boolean = false;
   uid: string = '';
+  loginError: string | null = null;
+  verificationError: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -36,8 +39,10 @@ export class LoginComponent {
         (response: any) => {
           this.isVerificationStage = true;
           this.uid = uid; // Asumiendo que el uid es el email
+          this.loginError = null;
         },
         (error) => {
+          this.loginError = error; // Error recibido del servicio
           console.error('Login error:', error);
         }
       );
@@ -53,8 +58,10 @@ export class LoginComponent {
           document.cookie = `token=${response.token};path=/`;
           // Redirigir a la página deseada
           this.router.navigate(['/dashboard']);
+          this.verificationError = null;
         },
         (error) => {
+          this.verificationError = error; // Error recibido del servicio
           console.error('Verification error:', error);
         }
       );

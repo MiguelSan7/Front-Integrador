@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes gradient-text {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, #6b72ff, #94a6f7, #d2ff1e, #e3f899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 400% 400%;
+  animation: gradient-text 3s ease infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-welcome {
+  animation: fade-up 1.5s ease-out;
+}

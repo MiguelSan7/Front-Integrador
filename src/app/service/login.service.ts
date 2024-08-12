@@ -16,21 +16,17 @@ export class LoginService {
   constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) { }
 
   login(uid: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { uid, password }, { responseType: 'text' }).pipe(
+    return this.http.post(`${this.apiUrl}/login`, { uid, password }, { responseType: 'json' }).pipe(
       map((response: any) => {
-        try {
-          const parsedResponse = JSON.parse(response);
-          if (parsedResponse && parsedResponse.token) {
-            this.cookieService.set('auth_token', parsedResponse.token);
-          }
-          return parsedResponse;
-        } catch (e) {
-          return { message: response };
+        if (response && response.token) {
+          this.cookieService.set('auth_token', response.token);
         }
+        return response;
       }),
       catchError((error) => {
         console.error('Login error:', error);
-        return throwError(error);
+        const errorMessage = error.error?.message || 'Credenciales incorrectas'; // Extrae el mensaje de error
+        return throwError(errorMessage);
       })
     );
   }
@@ -45,7 +41,8 @@ export class LoginService {
       }),
       catchError((error) => {
         console.error('Verification error:', error);
-        return throwError(error);
+        const errorMessage = error.error?.message || 'Codigo de veririfcación incorrecto';
+        return throwError(errorMessage);
       })
     );
   }
