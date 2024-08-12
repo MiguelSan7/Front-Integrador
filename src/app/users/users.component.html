@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<div class="flex flex-wrap justify-center items-start gap-8 p-20">
+  <button
+    class="flex flex-col items-center max-w-sm rounded-lg overflow-hidden shadow-lg bg-card text-card-foreground focus:outline-none focus:ring ring-primary ring-opacity-50 transition duration-300"
+    routerLink="/users/create"
+  >
+    <img
+      class="w-48 h-48 object-cover opacity-50"
+      src="https://img.icons8.com/?size=100&id=114100&format=png&color=000000"
+      alt="Create Stage"
+    />
+    <div class="p-4 text-center">
+      <h3 class="text-lg font-semibold mb-2">Añadir Administrador</h3>
+      <p class="text-sm">Añadir un nuevo administrador a la lista a la lista</p>
+    </div>
+  </button>
+  <button
+    class="flex flex-col items-center max-w-sm rounded-lg overflow-hidden shadow-lg bg-card text-card-foreground focus:outline-none focus:ring ring-primary ring-opacity-50 transition duration-300"
+    routerLink="/users/list"
+  >
+    <img
+      class="w-48 h-48 object-cover"
+      src="https://img.icons8.com/?size=100&id=95645&format=png&color=000000"
+      alt="Show Stage"
+    />
+    <div class="p-4 text-center">
+      <h3 class="text-lg font-semibold mb-2">Ver todos</h3>
+      <p class="text-sm">Muestra una lista de todas los administradores</p>
+    </div>
+  </button>
+</div>
+<router-outlet></router-outlet>

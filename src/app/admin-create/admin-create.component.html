@@ -1,0 +1,78 @@
+<app-navbar></app-navbar>
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Crear Admin</h2>
+  <form [formGroup]="adminForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+      <input id="email" formControlName="email" type="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+      <div *ngIf="adminForm.get('email')?.invalid && adminForm.get('email')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="adminForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="adminForm.get('email')?.errors?.['email']">Invalid email format.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
+      <input id="password" formControlName="password" type="password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+      <div *ngIf="adminForm.get('password')?.invalid && adminForm.get('password')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="adminForm.get('password')?.errors?.['required']">Password is required.</small>
+        <small *ngIf="adminForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="phone" class="block text-sm font-medium text-gray-700">Phone:</label>
+      <input id="phone" formControlName="phone" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+      <div *ngIf="adminForm.get('phone')?.invalid && adminForm.get('phone')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="adminForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+        <small *ngIf="adminForm.get('phone')?.errors?.['minlength']">Phone number must be 10 digits long.</small>
+        <small *ngIf="adminForm.get('phone')?.errors?.['maxlength']">Phone number must be 10 digits long.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="nickname" class="block text-sm font-medium text-gray-700">Nickname:</label>
+      <input id="nickname" formControlName="nickname" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+      <div *ngIf="adminForm.get('nickname')?.invalid && adminForm.get('nickname')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="adminForm.get('nickname')?.errors?.['required']">Nickname is required.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
+      <input id="name" formControlName="name" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+      <div *ngIf="adminForm.get('name')?.invalid && adminForm.get('name')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="adminForm.get('name')?.errors?.['required']">Name is required.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="lastname" class="block text-sm font-medium text-gray-700">Last Name:</label>
+      <input id="lastname" formControlName="lastname" type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+      <div *ngIf="adminForm.get('lastname')?.invalid && adminForm.get('lastname')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="adminForm.get('lastname')?.errors?.['required']">Last name is required.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="birthdate" class="block text-sm font-medium text-gray-700">Birthdate:</label>
+      <input id="birthdate" formControlName="birthdate" type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+      <div *ngIf="adminForm.get('birthdate')?.invalid && adminForm.get('birthdate')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="adminForm.get('birthdate')?.errors?.['required']">Birthdate is required.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="age" class="block text-sm font-medium text-gray-700">Age:</label>
+      <input id="age" formControlName="age" type="number" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+      <div *ngIf="adminForm.get('age')?.invalid && adminForm.get('age')?.touched" class="mt-2 text-red-600 text-sm">
+        <small *ngIf="adminForm.get('age')?.errors?.['required']">Age is required.</small>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="adminForm.invalid" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      Create Admin
+    </button>
+  </form>
+  
+</div>

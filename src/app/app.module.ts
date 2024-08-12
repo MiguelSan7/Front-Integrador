@@ -16,6 +16,10 @@ import { TicketComponent } from './tickets/tickets.component';
 import { CunasCreateComponent } from './cunas-create/cunas-create.component';
 import { FormsModule } from '@angular/forms';
 import { CunasEditComponent } from './cunas-edit/cunas-edit.component';
+import { UsersComponent } from './users/users.component';
+import { AdminCreateComponent } from './admin-create/admin-create.component';
+import { AdminEditComponent } from './admin-edit/admin-edit.component';
+import { AdminListComponent } from './admin-list/admin-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { CunasEditComponent } from './cunas-edit/cunas-edit.component';
     CunasListComponent,
     TicketComponent,
     CunasCreateComponent,
-    CunasEditComponent
+    CunasEditComponent,
+    UsersComponent,
+    AdminCreateComponent,
+    AdminEditComponent,
+    AdminListComponent
   ],
   imports: [
     BrowserModule,
