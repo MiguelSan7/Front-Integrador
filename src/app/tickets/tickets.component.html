@@ -1,10 +1,36 @@
 <app-navbar></app-navbar>
-<div class="p-4">
-    <h2 class="text-2xl font-bold mb-4">Tickets de Soporte</h2>
-    <div *ngFor="let ticket of tickets">
-      <h3>{{ ticket.asunto }}</h3>
-      <p>{{ ticket.descripcion }}</p>
-      <p>{{ ticket.estado }}</p>
-    </div>
-  </div>
-  <router-outlet></router-outlet>
+<div class="ticket-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Asunto</th>
+        <th>Descripción</th>
+        <th>Estado</th>
+        <th>Usuario</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of tickets; let i = index" [ngClass]="{'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0}">
+        <td>{{ ticket.asunto }}</td>
+        <td>{{ ticket.descripcion }}</td>
+        <td>{{ ticket.estado }}</td>
+        <td>{{ ticket.users?.email }}</td>
+        <td>
+          <button *ngIf="isTicketEnEspera(ticket)" 
+                  class="btn-accept" 
+                  (click)="acceptTicket(ticket)">
+            Aceptar
+          </button>
+          <button *ngIf="isTicketEnRevision(ticket)" 
+                  class="btn-cancel" 
+                  (click)="concludeTicket(ticket)">
+            Concluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<router-outlet></router-outlet>

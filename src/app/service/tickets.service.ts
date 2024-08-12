@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TicketsService {
-  private apiUrl = 'http://127.0.0.1:3333';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {}
 
@@ -18,6 +20,18 @@ export class TicketsService {
   }
 
   private getToken(): string {
-    return localStorage.getItem('auth_token') || '';
+    return this.cookieService.get('auth_token') || '';
+  }
+  changeStatus(ticketId: number, status: string): Observable<any> {
+    const validStatuses = ['en espera', 'revision', 'concluida'];
+    if (!validStatuses.includes(status)) {
+      console.error('Estado no válido');
+      return of(null);
+    }
+  
+    const token = this.cookieService.get('auth_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const encodedStatus = encodeURIComponent(status);
+    return this.http.put(`${this.apiUrl}/changeStatus/${ticketId}/${encodedStatus}`, {}, { headers, responseType: 'json' });
   }
 }
