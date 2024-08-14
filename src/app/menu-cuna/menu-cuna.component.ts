@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
+import { SocketService } from '../service/socket.service';
 
 @Component({
   selector: 'app-menu-cuna',
@@ -10,12 +11,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./menu-cuna.component.scss']
 })
 export class MenuCunaComponent implements OnInit {
-  routeId: string = '';
+  routeId: number = 0;
   private apiUrl = environment.apiUrl;
 
   // Datos para los botones, inicializados vacíos
   firstEightButtons: { imgSrc: string, route: string, label: string }[] = [];
-  thirdButton = { label: 'Encender Cuna', action: () => this.EncenderCuna(), icon: 'assets/images/luz.png' };
+  thirdButton = { label: 'Encender Cuna', action: () => this.EncenderCuna(), icon: 'assets/images/cuna.png' };
   
   additionalButtons = [
     { label: 'Encender Luz', action: () => this.sendCommand(3), icon: 'assets/images/luz.png' },
@@ -23,12 +24,15 @@ export class MenuCunaComponent implements OnInit {
     { label: 'Activar Motor', action: () => this.sendCommand(9), icon: 'assets/images/juguete.png' }
   ];
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private socketService:SocketService,private http: HttpClient, private cookieService: CookieService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     // Obtener el ID de la ruta
-    this.routeId = this.route.snapshot.paramMap.get('id') || '';
-
+    this.routeId = parseInt(this.route.snapshot.paramMap.get('id') || '');
+    // Conéctate al servidor WebSocket
+    this.socketService.on('connect', () => {
+      console.log('Conectado al servidor WebSocket');
+    });
     // Configurar los datos de los botones después de obtener el ID
     this.firstEightButtons = [
       { imgSrc: 'assets/images/temperatura.png', route: `/individual/${this.routeId}/TP`, label: 'Temperatura' },
@@ -61,7 +65,7 @@ export class MenuCunaComponent implements OnInit {
       .subscribe(response => {
         alert('¡Acción realizada correctamente!');
       }, error => {
-        alert('Error realizando la acción: ' + error.message);
+        alert('Error realizando la acción: ' + "Verifica que la cuna este recibiendo corriente y este prendida");
       });
   }
   
@@ -71,20 +75,28 @@ export class MenuCunaComponent implements OnInit {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-
+  
     this.http.post<any>(`${this.apiUrl}/startCycle`, { cuna_id: this.routeId }, { headers })
-      .subscribe(response => {
-        // Si el código de estado es 200, se apaga correctamente
-        if (response.status === 200) {
-          alert('¡Cuna apagada correctamente!');
-        }
-      }, error => {
-        // Si el código de estado es 408, se encendió correctamente
-        if (error.status === 408) {
+      .subscribe(
+        response => {
+          // Aquí asumimos que el backend siempre retorna un status 200 para una operación exitosa
+          console.log('Response:', response);
           alert('¡Cuna encendida correctamente!');
-        } else {
-          alert('Error realizando la acción: ' + error.message);
+        },
+        error => {
+          console.error('Error:', error);
+  
+          if (error.status === 408) {
+            // Si el código de estado es 408, muestra un mensaje de éxito
+            alert('¡Cuna encendida correctamente! (con retraso en la respuesta)');
+          } else if (error.error && error.error.message) {
+            // Muestra el mensaje de error específico retornado por el backend
+            alert('Error realizando la acción: ' + error.error.message);
+          } else {
+            // Muestra un mensaje genérico si no hay un mensaje de error específico
+            alert('Error realizando la acción: Verifica que la cuna esté recibiendo corriente y esté prendida');
+          }
         }
-      });
+      );
   }
 }

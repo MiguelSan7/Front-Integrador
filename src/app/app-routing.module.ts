@@ -28,11 +28,13 @@ import { AuthRoleGuard } from './auth-role.guard';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { EditTicketComponent } from './edit-ticket/edit-ticket.component';
 import { AsignarBebeComponent } from './asignar-bebe/asignar-bebe.component';
+import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'cunas', component: CunasComponent,
     canActivate: [AuthRoleGuard],

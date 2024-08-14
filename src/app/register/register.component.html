@@ -1,0 +1,86 @@
+<section class="bg-rose-200 dark:bg-rose-200 relative overflow-hidden min-h-screen flex items-center justify-center">
+    <div class="absolute inset-0 bg-gray-400 opacity-20 backdrop-blur-md"></div>
+    <div class="relative z-10 w-full max-w-md px-4 py-8">
+      <div class="bg-cyan-400 rounded-lg border-teal-200 shadow-stone-500 dark:bg-cyan-600 dark:border-teal-200">
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+          <img src="assets/images/logo-day-zoom.png" class="w-24 h-24 mx-auto" />
+          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
+            Registro de Usuario
+          </h1>
+  
+          <!-- Registration Form -->
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6">
+            <div>
+              <label for="name" class="block mb-2 text-sm font-medium text-white">Nombre</label>
+              <input id="name" formControlName="name" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Nombre">
+              <div *ngIf="registerForm.controls['name'].invalid && registerForm.controls['name'].touched" class="text-red-500 text-sm mt-2">
+                Nombre es requerido
+              </div>
+            </div>
+  
+            <div>
+              <label for="lastname" class="block mb-2 text-sm font-medium text-white">Apellido</label>
+              <input id="lastname" formControlName="lastname" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Apellido">
+              <div *ngIf="registerForm.controls['lastname'].invalid && registerForm.controls['lastname'].touched" class="text-red-500 text-sm mt-2">
+                Apellido es requerido
+              </div>
+            </div>
+  
+            <div>
+              <label for="email" class="block mb-2 text-sm font-medium text-white">Email</label>
+              <input id="email" formControlName="email" type="email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Email">
+              <div *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched" class="text-red-500 text-sm mt-2">
+                Email es requerido y debe ser válido
+              </div>
+            </div>
+  
+            <div>
+              <label for="password" class="block mb-2 text-sm font-medium text-white">Contraseña</label>
+              <input id="password" formControlName="password" type="password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="••••••••">
+              <div *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched" class="text-red-500 text-sm mt-2">
+                Contraseña es requerida y debe tener al menos 6 caracteres
+              </div>
+            </div>
+  
+            <div>
+              <label for="phone" class="block mb-2 text-sm font-medium text-white">Teléfono</label>
+              <input id="phone" formControlName="phone" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Teléfono">
+              <div *ngIf="registerForm.controls['phone'].invalid && registerForm.controls['phone'].touched" class="text-red-500 text-sm mt-2">
+                Teléfono es requerido y debe tener 10 dígitos
+              </div>
+            </div>
+  
+            <div>
+              <label for="nickname" class="block mb-2 text-sm font-medium text-white">Apodo</label>
+              <input id="nickname" formControlName="nickname" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Apodo">
+              <div *ngIf="registerForm.controls['nickname'].invalid && registerForm.controls['nickname'].touched" class="text-red-500 text-sm mt-2">
+                Apodo es requerido
+              </div>
+            </div>
+  
+            <div>
+                <label for="birthdate" class="block mb-2 text-sm font-medium text-white">Fecha de Nacimiento</label>
+                <input id="birthdate" formControlName="birthdate" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required />
+                <div *ngIf="registerForm.controls['birthdate'].invalid && registerForm.controls['birthdate'].touched" class="text-red-500 text-sm mt-2">
+                  Fecha de nacimiento es requerida
+                </div>
+              </div>
+            <div>
+              <label for="age" class="block mb-2 text-sm font-medium text-white">Edad</label>
+              <input id="age" formControlName="age" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Edad">
+              <div *ngIf="registerForm.controls['age'].invalid && registerForm.controls['age'].touched" class="text-red-500 text-sm mt-2">
+                Edad es requerida
+              </div>
+            </div>
+  
+            <button type="submit" class="w-full text-white bg-amber-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              Registrar
+            </button>
+  
+            <p class="text-center">¿Ya tienes una cuenta? <a routerLink="/login" class="text-amber-400 hover:underline">Iniciar Sesion</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  

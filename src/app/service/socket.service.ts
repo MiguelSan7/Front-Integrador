@@ -54,4 +54,8 @@ export class SocketService {
       this.socket.disconnect();
     }
   }
+  off(event: string) {
+    this.socket.off(event);
+  }
+
 }
