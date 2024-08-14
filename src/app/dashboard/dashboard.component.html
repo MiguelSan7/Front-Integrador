@@ -1,8 +1,15 @@
-<app-navbar></app-navbar>
-<div class="flex justify-center items-center min-h-screen bg-gray-100 ">
+<app-navbar *ngIf="rol === '1'"></app-navbar>
+<div *ngIf="rol === '1'" class="flex justify-center items-center min-h-screen bg-gray-100 ">
     <h1 class="text-4xl font-bold text-gray-800 animate-welcome text-center gradient-text">
       Bienvenido  <br>
       a tu extesion administrativa
+    </h1>
+  </div>
+
+<app-navbar-user *ngIf="rol === '3'"></app-navbar-user>
+  <div *ngIf="rol === '3'" class="flex justify-center items-center min-h-screen bg-gray-100" >
+    <h1 class="text-4xl font-bold text-gray-800 animate-welcome text-center gradient-text">
+      <br> Bienvenido 
     </h1>
   </div>
   

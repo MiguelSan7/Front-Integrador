@@ -1,0 +1,29 @@
+<app-navbar-user></app-navbar-user>
+
+<div class="max-w-4xl mx-auto p-6">
+
+  <!-- Botón para agregar una nueva cuna -->
+  <div class="flex justify-end mb-6">
+    <button (click)="goToAddCuna()" class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600">
+      Agregar Cuna
+    </button>
+  </div>
+
+  <div *ngFor="let cuna of cunas" class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <h2 class="text-2xl font-semibold mb-2">{{ cuna.apodo }} ({{ cuna.numserie }})</h2>
+    <p *ngIf="cuna.bebes" class="text-gray-700">Bebé: {{ cuna.bebes.nombres }} {{ cuna.bebes.apellidos }}</p>
+    <p *ngIf="!cuna.bebes" class="text-gray-500">No hay bebé asignado.</p>
+    
+    <div class="mt-4">
+      <!-- Botón para editar la cuna -->
+      <button (click)="goToEditCuna(cuna.id)" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mr-2">
+        Editar
+      </button>
+      
+      <!-- Botón para ver datos del sensor -->
+      <button (click)="goToSensorData(cuna.id)" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+        Ver Datos del Sensor
+      </button>
+    </div>
+  </div>
+</div>

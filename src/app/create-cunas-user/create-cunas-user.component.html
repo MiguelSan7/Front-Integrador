@@ -1,0 +1,36 @@
+<app-navbar-user></app-navbar-user>
+
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+  <h2 class="text-2xl font-semibold mb-4">Agregar Cuna</h2>
+
+  <form (ngSubmit)="onSubmit()" #cunaForm="ngForm">
+
+    <!-- Campo para el número de serie -->
+    <div class="mb-4">
+      <label for="numserie" class="block text-gray-700 font-medium mb-2">Número de Serie</label>
+      <input type="text" id="numserie" name="numserie" class="w-full px-3 py-2 border rounded" [(ngModel)]="numserie" #numserieInput="ngModel" required maxlength="5">
+      <div *ngIf="numserieInput.invalid && (numserieInput.dirty || numserieInput.touched)" class="text-red-500 text-sm mt-1">
+        Número de serie es requerido y debe tener un máximo de 5 caracteres.
+      </div>
+    </div>
+
+    <!-- Campo para el apodo -->
+    <div class="mb-4">
+      <label for="apodo" class="block text-gray-700 font-medium mb-2">Apodo</label>
+      <input type="text" id="apodo" name="apodo" class="w-full px-3 py-2 border rounded" [(ngModel)]="apodo" #apodoInput="ngModel" required>
+      <div *ngIf="apodoInput.invalid && (apodoInput.dirty || apodoInput.touched)" class="text-red-500 text-sm mt-1">
+        Apodo es requerido.
+      </div>
+    </div>
+
+    <!-- Mensaje de cuna no encontrada -->
+    <div *ngIf="cunaNotFound" class="text-red-500 text-sm mb-4">
+      No se encontró ninguna cuna con ese número de serie.
+    </div>
+
+    <!-- Botón de enviar -->
+    <button type="submit" [disabled]="cunaForm.invalid" class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600">
+      Agregar Cuna
+    </button>
+  </form>
+</div>

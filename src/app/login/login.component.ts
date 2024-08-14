@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   
-  
+  token:string = ''
   loginForm: FormGroup;
   verificationForm: FormGroup;
   isVerificationStage: boolean = false;
@@ -31,7 +31,9 @@ export class LoginComponent {
       code: ['', [Validators.required]]
     });
   }
-
+ngOnInit(): void {
+  
+}
   onSubmitLogin(): void {
     if (this.loginForm.valid) {
       const { uid, password } = this.loginForm.value;
@@ -54,9 +56,12 @@ export class LoginComponent {
       const { code } = this.verificationForm.value;
       this.loginService.verify(this.uid, code).subscribe(
         (response: any) => {
+          console.log(response)
           // Guarda el token en una cookie
           document.cookie = `token=${response.token};path=/`;
           // Redirigir a la página deseada
+          document.cookie = `rol=${response.user.role_id};path=/`;
+
           this.router.navigate(['/dashboard']);
           this.verificationError = null;
         },

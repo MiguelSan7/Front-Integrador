@@ -20,6 +20,21 @@ import { UsersComponent } from './users/users.component';
 import { AdminCreateComponent } from './admin-create/admin-create.component';
 import { AdminEditComponent } from './admin-edit/admin-edit.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
+import { CunasUserComponent } from './cunas-user/cunas-user.component';
+import { CreateCunasUserComponent } from './create-cunas-user/create-cunas-user.component';
+import { EditCunasUserComponent } from './edit-cunas-user/edit-cunas-user.component';
+import { MenuCunaComponent } from './menu-cuna/menu-cuna.component';
+import { MostrarIndividualComponent } from './mostrar-individual/mostrar-individual.component';
+import { MostrarTodosComponent } from './mostrar-todos/mostrar-todos.component';
+import { HistorialComponent } from './historial/historial.component';
+import { BebeComponent } from './bebe/bebe.component';
+import { NavbarUserComponent } from './navbar-user/navbar-user.component';
+import { TicketsUserComponent } from './tickets-user/tickets-user.component';
+import { CreateBebeComponent } from './create-bebe/create-bebe.component';
+import { EditBebeComponent } from './edit-bebe/edit-bebe.component';
+import { CreateTicketComponent } from './create-ticket/create-ticket.component';
+import { EditTicketComponent } from './edit-ticket/edit-ticket.component';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +50,22 @@ import { AdminListComponent } from './admin-list/admin-list.component';
     UsersComponent,
     AdminCreateComponent,
     AdminEditComponent,
-    AdminListComponent
+    AdminListComponent,
+    CunasUserComponent,
+    CreateCunasUserComponent,
+    EditCunasUserComponent,
+    MenuCunaComponent,
+    MostrarIndividualComponent,
+    MostrarTodosComponent,
+    HistorialComponent,
+    BebeComponent,
+    NavbarUserComponent,
+    TicketsUserComponent,
+    CreateBebeComponent,
+    EditBebeComponent,
+    CreateTicketComponent,
+    EditTicketComponent,
+    NotAuthorizedComponent
   ],
   imports: [
     BrowserModule,
