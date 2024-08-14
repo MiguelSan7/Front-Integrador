@@ -37,5 +37,9 @@ export class CreateCunasUserComponent {
           }
         }
       });
+      
+  }
+  goToAddCuna() {
+    this.router.navigate(['/cunasuser']); // Asegúrate de que '/add-cuna' sea la ruta correcta
   }
 }

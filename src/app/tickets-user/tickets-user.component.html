@@ -1,1 +1,61 @@
-<p>tickets-user works!</p>
+<app-navbar-user></app-navbar-user>
+<div class="bg-pink-100 min-h-screen p-4">
+  <div class="max-w-4xl mx-auto p-6">
+
+    <!-- Botón para agregar un nuevo ticket -->
+    <div class="flex justify-end mb-6">
+      <button (click)="addTicket()" class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600 flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        Agregar Ticket
+      </button>
+    </div>
+
+    <!-- Filtro de Estado -->
+    <div class="mb-6">
+      <label for="filter" class="block text-lg font-medium text-gray-700 mb-2">Filtrar por estado:</label>
+      <select id="filter" [(ngModel)]="filter" (change)="onFilterChange(filter)" 
+              class="block w-full p-2 border border-gray-300 rounded">
+        <option value="todos">Todos</option>
+        <option value="en espera">En Espera</option>
+        <option value="revision">En Revisión</option>
+        <option value="concluida">Concluida</option>
+      </select>
+    </div>
+
+    <!-- Lista de Tickets -->
+    <div *ngFor="let ticket of filteredTickets" class="bg-white shadow-lg rounded-lg p-6 mb-6 transition transform hover:scale-105 hover:shadow-xl">
+      <div class="flex items-center mb-4">
+        <div class="bg-blue-100 text-blue-500 rounded-full p-3 mr-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m2 0a2 2 0 100-4h-1.5a2.5 2.5 0 01-5 0H7a2 2 0 100 4m-2 8h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v11a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-semibold text-gray-900">{{ ticket.asunto }}</h2>
+      </div>
+
+      <div class="mb-4">
+        <p class="text-gray-600"><strong>Descripción:</strong> {{ ticket.descripcion }}</p>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div class="text-gray-500">
+          <p class="mb-1"><strong>Estado:</strong> <span [ngClass]="getEstadoClass(ticket.estado)">{{ ticket.estado }}</span></p>
+          <p><strong>Creado:</strong> {{ ticket.created_at | date:'longDate' }}</p>
+        </div>
+
+        <div *ngIf="ticket.estado === 'en espera'" class="mt-4">
+          <!-- Botón de editar, solo si el ticket está en estado 'en espera' -->
+          <button (click)="editTicket(ticket.id)" 
+                  class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17h2M12 7v10M5.455 15.293l.857.857L5.455 15.293zM5.455 15.293L5.455 15.293zM5.455 15.293a1.58 1.58 0 002.236 0L19 4.983M9.55 20.938a2 2 0 001.415.621c.585 0 1.125-.227 1.536-.621l.07-.071 6.936-6.935a2 2 0 00.621-1.414V7.485a2 2 0 00-.62-1.414L13.95 1.515a2 2 0 00-1.415-.621H8.585a2 2 0 00-1.415.621l-.07.071L1.093 8.62a2 2 0 00-.62 1.414v4.07a2 2 0 00.62 1.414L5.455 15.293z"></path>
+            </svg>
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

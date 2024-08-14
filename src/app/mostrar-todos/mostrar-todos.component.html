@@ -1,1 +1,24 @@
-<p>mostrar-todos works!</p>
+<app-navbar-user></app-navbar-user>
+
+<div class="bg-pink-100 min-h-screen p-4">
+    <button routerLink="/menu/{{cunaId}}" class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600 " style="padding: 10px,10px,10px,10px;">
+        Regresar
+     </button>
+<div class="container mx-auto p-4 bg-white rounded-lg shadow-lg">
+    <h1 class="text-xl font-bold mb-4">Datos de Todos los Sensores</h1>
+    
+    <div *ngIf="sensors.length > 0; else noData">
+      <div *ngFor="let sensor of sensors" class="sensor-card mb-4 p-4 border rounded-lg bg-white">
+        <h2 class="text-lg font-semibold">{{ sensor.descripcion }}</h2>
+        <p><strong>ID del Sensor:</strong> {{ sensor.sensorId }}</p>
+        <p><strong>Unidad:</strong> {{ sensor.unidad }}</p>
+        <p><strong>Dato:</strong> {{ sensor.data.data }}</p>
+        <p><strong>Fecha y Hora:</strong> {{ sensor.data.datetime | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+      </div>
+    </div>
+  
+    <ng-template #noData>
+      <p>No se encontraron datos para los sensores.</p>
+    </ng-template>
+  </div>
+</div>

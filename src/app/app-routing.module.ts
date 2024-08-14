@@ -27,6 +27,7 @@ import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 import { AuthRoleGuard } from './auth-role.guard';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { EditTicketComponent } from './edit-ticket/edit-ticket.component';
+import { AsignarBebeComponent } from './asignar-bebe/asignar-bebe.component';
 
 
 const routes: Routes = [
@@ -82,7 +83,7 @@ const routes: Routes = [
   { path: 'menu/:id', component: MenuCunaComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: [3] }},
-  { path: 'individual/:id', component: MostrarIndividualComponent,
+  { path: 'individual/:id/:sensor', component: MostrarIndividualComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: [3] }},
   { path: 'todos/:id', component: MostrarTodosComponent,
@@ -100,7 +101,9 @@ const routes: Routes = [
   { path: 'editticket/:id', component: EditTicketComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: [3] } },
-
+    { path: 'asignarbebe/:id', component: AsignarBebeComponent,
+      canActivate: [AuthRoleGuard],
+      data: { roles: [3] } },
 
 
 

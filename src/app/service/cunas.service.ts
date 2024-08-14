@@ -76,4 +76,45 @@ addCuna(numserie: string, apodo: string): Observable<{ message: string, data: Cu
       })
     );
 }
+getHistorial(cunaId: string,token:string): Observable<any[]> {
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.post<any[]>(`${this.apiUrl}/getAllData`, { cuna_id: cunaId }, { headers });
+}
+getDataByCuna(cunaId: string, fechaInicio: string, fechaFin: string, token: string): Observable<any[]> {
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.post<any[]>(`${this.apiUrl}/getDataByCuna`, { cunaId, fechaInicio, fechaFin }, { headers });
+}
+getCunaById(cunaId: string, token: string): Observable<any> {
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+  return this.http.get<any>(`${this.apiUrl}/showCuna/${cunaId}`, { headers });
+}
+
+updateCuna(cunaId: string, apodo: string, token: string): Observable<any> {
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+  return this.http.put<any>(`${this.apiUrl}/userUpdate/${cunaId}`, { apodo }, { headers });
+}
+UserUpdate(id: string, cuna: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/adminUpdate/${id}`, cuna, { headers: this.getHeaders() });
+}
+getCunasWithoutBebe(): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/showCunasWithoutBebe`,{ headers: this.getHeaders() });
+}
+
+asignarBebe(numserie: string, bebeId: number): Observable<any> {
+  return this.http.put<any>(`${this.apiUrl}/asignarBebe`, { numserie, bebeId },{ headers: this.getHeaders() });
+}
 }
