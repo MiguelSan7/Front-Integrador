@@ -1,36 +1,37 @@
 <app-navbar></app-navbar>
-<div class="ticket-container">
-  <table>
-    <thead>
-      <tr>
-        <th>Asunto</th>
-        <th>Descripción</th>
-        <th>Estado</th>
-        <th>Usuario</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let ticket of tickets; let i = index" [ngClass]="{'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0}">
-        <td>{{ ticket.asunto }}</td>
-        <td>{{ ticket.descripcion }}</td>
-        <td>{{ ticket.estado }}</td>
-        <td>{{ ticket.users?.email }}</td>
-        <td>
-          <button *ngIf="isTicketEnEspera(ticket)" 
-                  class="btn-accept" 
-                  (click)="acceptTicket(ticket)">
-            Aceptar
-          </button>
-          <button *ngIf="isTicketEnRevision(ticket)" 
-                  class="btn-cancel" 
-                  (click)="concludeTicket(ticket)">
-            Concluir
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="min-h-screen bg-rose-100 py-10 flex justify-center">
+  <div class="bg-white shadow-lg rounded-lg w-full max-w-7xl p-6 ticket-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Asunto</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Usuario</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets; let i = index" [ngClass]="{'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0}">
+          <td>{{ ticket.asunto }}</td>
+          <td>{{ ticket.descripcion }}</td>
+          <td>{{ ticket.estado }}</td>
+          <td>{{ ticket.users?.email }}</td>
+          <td>
+            <button *ngIf="isTicketEnEspera(ticket)" 
+                    class="btn-accept" 
+                    (click)="acceptTicket(ticket)">
+              Aceptar
+            </button>
+            <button *ngIf="isTicketEnRevision(ticket)" 
+                    class="btn-cancel" 
+                    (click)="concludeTicket(ticket)">
+              Concluir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
 </div>
-
-<router-outlet></router-outlet>

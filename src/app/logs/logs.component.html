@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+
+<!-- Fondo rosado -->
+<div class="min-h-screen bg-rose-100 py-10 flex justify-center">
+  <!-- Contenedor blanco con sombra para la tabla -->
+  <div class="bg-white shadow-lg rounded-lg w-full max-w-7xl p-6">
+    <!-- Filtros de búsqueda -->
+    <div class="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Número de Serie:</label>
+        <input [(ngModel)]="filters.serialNumber" (input)="applyFilters()" class="w-full border rounded-lg px-4 py-2 focus:ring focus:ring-rose-200" placeholder="Buscar Número de Serie">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">ID del Sensor:</label>
+        <input [(ngModel)]="filters.sensorId" (input)="applyFilters()" class="w-full border rounded-lg px-4 py-2 focus:ring focus:ring-rose-200" placeholder="Buscar ID del Sensor">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Unidad:</label>
+        <input [(ngModel)]="filters.unit" (input)="applyFilters()" class="w-full border rounded-lg px-4 py-2 focus:ring focus:ring-rose-200" placeholder="Buscar Unidad">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Descripción:</label>
+        <input [(ngModel)]="filters.description" (input)="applyFilters()" class="w-full border rounded-lg px-4 py-2 focus:ring focus:ring-rose-200" placeholder="Buscar Descripción">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Valor:</label>
+        <input [(ngModel)]="filters.value" (input)="applyFilters()" class="w-full border rounded-lg px-4 py-2 focus:ring focus:ring-rose-200" placeholder="Buscar Valor">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Fecha:</label>
+        <input [(ngModel)]="filters.date" (input)="applyFilters()" type="date" class="w-full border rounded-lg px-4 py-2 focus:ring focus:ring-rose-200">
+      </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-3 px-5 border-b text-left text-gray-600 font-medium">Número de Serie</th>
+            <th class="py-3 px-5 border-b text-left text-gray-600 font-medium">ID del Sensor</th>
+            <th class="py-3 px-5 border-b text-left text-gray-600 font-medium">Unidad</th>
+            <th class="py-3 px-5 border-b text-left text-gray-600 font-medium">Descripción</th>
+            <th class="py-3 px-5 border-b text-left text-gray-600 font-medium">Valor</th>
+            <th class="py-3 px-5 border-b text-left text-gray-600 font-medium">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of filteredLogs" class="hover:bg-rose-50">
+            <td class="py-3 px-5 border-b">{{ log.infoSensor.deviceID }}</td>
+            <td class="py-3 px-5 border-b">{{ log.infoSensor.IdSensor }}</td>
+            <td class="py-3 px-5 border-b">{{ log.infoSensor.unidad }}</td>
+            <td class="py-3 px-5 border-b">{{ log.infoSensor.descripcion }}</td>
+            <td class="py-3 px-5 border-b">{{ log.infoSensor.data.value }}</td>
+            <td class="py-3 px-5 border-b">{{ log.infoSensor.data.datetime | date: 'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

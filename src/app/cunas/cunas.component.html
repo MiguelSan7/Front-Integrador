@@ -1,7 +1,8 @@
 <app-navbar></app-navbar>
+<div class="min-h-screen bg-rose-100 py-10 flex justify-center">
 <div class="flex flex-wrap justify-center items-start gap-8 p-20">
   <button
-    class="flex flex-col items-center max-w-sm rounded-lg overflow-hidden shadow-lg bg-card text-card-foreground focus:outline-none focus:ring ring-primary ring-opacity-50 transition duration-300"
+    class="bg-white flex flex-col items-center max-w-sm rounded-lg overflow-hidden shadow-lg bg-card text-card-foreground focus:outline-none focus:ring ring-primary ring-opacity-50 transition duration-300"
     routerLink="/cunas/create"
   >
     <img
@@ -15,7 +16,7 @@
     </div>
   </button>
   <button
-    class="flex flex-col items-center max-w-sm rounded-lg overflow-hidden shadow-lg bg-card text-card-foreground focus:outline-none focus:ring ring-primary ring-opacity-50 transition duration-300"
+    class="bg-white flex flex-col items-center max-w-sm rounded-lg overflow-hidden shadow-lg bg-card text-card-foreground focus:outline-none focus:ring ring-primary ring-opacity-50 transition duration-300"
     routerLink="/cunas/list"
   >
     <img
@@ -29,4 +30,6 @@
     </div>
   </button>
 </div>
+</div>
+
 <router-outlet></router-outlet>
