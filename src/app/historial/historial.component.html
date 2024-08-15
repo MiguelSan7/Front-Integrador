@@ -10,6 +10,7 @@
       <input type="date" [(ngModel)]="fechaInicio" class="px-4 py-2 border rounded" />
       <input type="date" [(ngModel)]="fechaFin" class="px-4 py-2 border rounded" />
       <button (click)="filterByDate()" class="px-4 py-2 bg-blue-500 text-white rounded">Buscar</button>
+      <button (click)="loadHistorial()" class="px-4 py-2 bg-blue-500 text-white rounded">Todos</button>
     </div>
 
     <table class="min-w-full divide-y divide-gray-200">
