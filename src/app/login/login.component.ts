@@ -32,8 +32,11 @@ export class LoginComponent implements OnInit {
     });
   }
 ngOnInit(): void {
-  
+  if(this.token){
+    this.router.navigate(['/dashboard']);
+  }
 }
+
   onSubmitLogin(): void {
     if (this.loginForm.valid) {
       const { uid, password } = this.loginForm.value;
