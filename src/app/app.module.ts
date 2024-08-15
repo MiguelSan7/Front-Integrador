@@ -37,6 +37,7 @@ import { EditTicketComponent } from './edit-ticket/edit-ticket.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { AsignarBebeComponent } from './asignar-bebe/asignar-bebe.component';
 import { RegisterComponent } from './register/register.component';
+import { DatosBebeComponent } from './datos-bebe/datos-bebe.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { RegisterComponent } from './register/register.component';
     EditTicketComponent,
     NotAuthorizedComponent,
     AsignarBebeComponent,
-    RegisterComponent
+    RegisterComponent,
+    DatosBebeComponent
   ],
   imports: [
     BrowserModule,

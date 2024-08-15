@@ -49,6 +49,8 @@ export class LoginService {
 
   logout(): void {
     this.cookieService.delete('auth_token');
+    this.cookieService.delete('rol');
+    this.cookieService.delete('token');
     this.router.navigate(['/login']);
   }
 
