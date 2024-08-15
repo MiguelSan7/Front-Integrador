@@ -100,6 +100,15 @@ getDataByCuna(cunaId: string, fechaInicio: string, fechaFin: string, token: stri
 
   return this.http.post<any[]>(`${this.apiUrl}/getDataByCuna`, { cunaId, fechaInicio, fechaFin }, { headers });
 }
+getDangerDataByCuna(cunaId: string, sensorId: string, fechaInicio: string, fechaFin: string, token: string): Observable<any[]> {
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.post<any[]>(`http://127.0.0.1:3333/getHighValues`, { cunaId, sensorId, fechaInicio, fechaFin }, { headers });
+}
+
 getCunaById(cunaId: string, token: string): Observable<any> {
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${token}`,

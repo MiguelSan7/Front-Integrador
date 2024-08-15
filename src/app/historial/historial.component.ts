@@ -17,6 +17,7 @@ export class HistorialComponent implements OnInit {
   token: string = '';
   fechaInicio: string = '';
   fechaFin: string = '';
+  sensorId: string = '';
 
   constructor(
     private historialService: CunasService,
@@ -41,9 +42,6 @@ export class HistorialComponent implements OnInit {
 
   filterByDate() {
     if (this.fechaInicio && this.fechaFin && new Date(this.fechaInicio) <= new Date(this.fechaFin)) {
-      console.log(this.fechaInicio)
-      console.log(this.fechaFin)
-
       this.historialService.getDataByCuna(this.cunaId, this.fechaInicio, this.fechaFin, this.token).subscribe(data => {
         this.historial = data;
         this.totalItems = data.length;
@@ -53,6 +51,22 @@ export class HistorialComponent implements OnInit {
       });
     } else {
       alert('La fecha de inicio no puede ser mayor que la fecha de fin, y ambas fechas deben ser válidas.');
+    }
+  }
+
+  filterByDateDanger() {
+    if (this.sensorId && this.fechaInicio && this.fechaFin && new Date(this.fechaInicio) <= new Date(this.fechaFin)) {
+      console.log(this.sensorId)
+      this.historialService.getDangerDataByCuna(this.cunaId, this.sensorId, this.fechaInicio, this.fechaFin, this.token).subscribe(data => {
+        this.historial = data;
+        this.totalItems = data.length;
+        this.currentPage = 1; // Reset page to 1 when filtering
+      }, error => {
+        console.error('Error filtering historial:', error);
+        console.log(this.sensorId)
+      });
+    } else {
+      alert('Seleccione un sensor válido y asegúrese de que las fechas son correctas.');
     }
   }
 

@@ -12,7 +12,14 @@
       <button (click)="filterByDate()" class="px-4 py-2 bg-blue-500 text-white rounded">Buscar</button>
       <button (click)="loadHistorial()" class="px-4 py-2 bg-blue-500 text-white rounded">Todos</button>
     </div>
-
+    <div class="mb-4 flex space-x-4">
+      <select [(ngModel)]="sensorId" class="px-4 py-2 border rounded">
+        <option value="" disabled selected>Seleccione un Sensor</option>
+        <option value="SRC">Frecuencia Cardiaca (SRC)</option>
+        <option value="MQ">Gas (MQ)</option>
+      </select>
+      <button (click)="filterByDateDanger()"class="px-4 py-2 bg-blue-500 text-white rounded">Buscar</button>
+    </div>
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
         <tr>

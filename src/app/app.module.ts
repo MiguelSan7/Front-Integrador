@@ -38,6 +38,7 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
 import { AsignarBebeComponent } from './asignar-bebe/asignar-bebe.component';
 import { RegisterComponent } from './register/register.component';
 import { LogsComponent } from './logs/logs.component';
+import { DatosBebeComponent } from './datos-bebe/datos-bebe.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { LogsComponent } from './logs/logs.component';
     NotAuthorizedComponent,
     AsignarBebeComponent,
     RegisterComponent,
+    DatosBebeComponent,
     LogsComponent
   ],
   imports: [

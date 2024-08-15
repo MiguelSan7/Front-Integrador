@@ -30,6 +30,7 @@ import { EditTicketComponent } from './edit-ticket/edit-ticket.component';
 import { AsignarBebeComponent } from './asignar-bebe/asignar-bebe.component';
 import { RegisterComponent } from './register/register.component';
 import { LogsComponent } from './logs/logs.component';
+import { DatosBebeComponent } from './datos-bebe/datos-bebe.component';
 
 
 const routes: Routes = [
@@ -107,6 +108,9 @@ const routes: Routes = [
     { path: 'asignarbebe/:id', component: AsignarBebeComponent,
       canActivate: [AuthRoleGuard],
       data: { roles: [3] } },
+      { path: 'datosbebe/:id', component: DatosBebeComponent,
+        canActivate: [AuthRoleGuard],
+        data: { roles: [3] } },
   { path: 'logs', component: LogsComponent,
     canActivate: [AuthRoleGuard],
     data: { roles: [1] } }, 
