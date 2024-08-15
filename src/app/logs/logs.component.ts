@@ -28,7 +28,7 @@ export class LogsComponent implements OnInit, OnDestroy {
     this.fetchLogs();
 
     // Escuchar el evento 'dataUpdated' desde WebSocket
-    this.socketService.on('sensores', (data: any) => {
+    this.socketService.on('sensores1', (data: any) => {
       this.logs = this.transformLogs(data);
       this.applyFilters();
     });
@@ -71,6 +71,6 @@ export class LogsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.socketService.off('sensores');
+    this.socketService.off('sensores1');
   }
 }
