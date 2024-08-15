@@ -106,7 +106,7 @@ getDangerDataByCuna(cunaId: string, sensorId: string, fechaInicio: string, fecha
     'Content-Type': 'application/json'
   });
 
-  return this.http.post<any[]>(`http://127.0.0.1:3333/getHighValues`, { cunaId, sensorId, fechaInicio, fechaFin }, { headers });
+  return this.http.post<any[]>(`${this.apiUrl}/getHighValues`, { cunaId, sensorId, fechaInicio, fechaFin }, { headers });
 }
 
 getCunaById(cunaId: string, token: string): Observable<any> {
