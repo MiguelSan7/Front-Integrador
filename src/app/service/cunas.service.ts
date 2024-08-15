@@ -90,7 +90,7 @@ getDatosBebe(BebeId: string,token:string): Observable<any[]> {
     'Content-Type': 'application/json'
   });
 
-  return this.http.post<any[]>(`http://127.0.0.1:3333/getBabyData`, {bebeId: BebeId }, { headers });
+  return this.http.post<any[]>(`${this.apiUrl}/getBabyData`, {bebeId: BebeId }, { headers });
 }
 getDataByCuna(cunaId: string, fechaInicio: string, fechaFin: string, token: string): Observable<any[]> {
   const headers = new HttpHeaders({

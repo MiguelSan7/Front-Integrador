@@ -13,6 +13,8 @@ import { SocketService } from '../service/socket.service';
 export class MenuCunaComponent implements OnInit {
   routeId: number = 0;
   private apiUrl = environment.apiUrl;
+  isLoading: boolean = false; // Estado para manejar la carga
+  buttonsDisabled: boolean = false; // Estado para manejar la deshabilitación de botones
 
   // Datos para los botones, inicializados vacíos
   firstEightButtons: { imgSrc: string, route: string, label: string }[] = [];
@@ -24,7 +26,13 @@ export class MenuCunaComponent implements OnInit {
     { label: 'Activar Motor', action: () => this.sendCommand(9), icon: 'assets/images/juguete.png' }
   ];
 
-  constructor(private socketService:SocketService,private http: HttpClient, private cookieService: CookieService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private socketService: SocketService,
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     // Obtener el ID de la ruta
@@ -47,29 +55,37 @@ export class MenuCunaComponent implements OnInit {
   }
 
   navigate(route: string) {
-    this.router.navigate([route]);
+    if (!this.buttonsDisabled) {
+      this.router.navigate([route]);
+    }
   }
   
   navigateToHistorial() {
-    this.router.navigate([`/historial/${this.routeId}`]);
+    if (!this.buttonsDisabled) {
+      this.router.navigate([`/historial/${this.routeId}`]);
+    }
   }
   
   sendCommand(number: number) {
-    const token = this.cookieService.get('auth_token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-
-    this.http.post<any>(`${this.apiUrl}/sendNumber`, { cuna_id: this.routeId, number }, { headers })
-      .subscribe(response => {
-        alert('¡Acción realizada correctamente!');
-      }, error => {
-        alert('Error realizando la acción: ' + "Verifica que la cuna este recibiendo corriente y este prendida");
+    if (!this.buttonsDisabled) {
+      const token = this.cookieService.get('auth_token');
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
       });
+  
+      this.http.post<any>(`${this.apiUrl}/sendNumber`, { cuna_id: this.routeId, number }, { headers })
+        .subscribe(response => {
+          alert('¡Acción realizada correctamente!');
+        }, error => {
+          alert('Error realizando la acción: ' + "Verifica que la cuna este recibiendo corriente y este prendida");
+        });
+    }
   }
   
   EncenderCuna() {
+    this.isLoading = true; // Inicia la carga
+    this.buttonsDisabled = true; // Deshabilita los botones
     const token = this.cookieService.get('auth_token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
@@ -79,21 +95,21 @@ export class MenuCunaComponent implements OnInit {
     this.http.post<any>(`${this.apiUrl}/startCycle`, { cuna_id: this.routeId }, { headers })
       .subscribe(
         response => {
-          // Aquí asumimos que el backend siempre retorna un status 200 para una operación exitosa
+          this.isLoading = false; // Detiene la carga
+          this.buttonsDisabled = false; // Habilita los botones nuevamente
           console.log('Response:', response);
-          alert('¡Cuna encendida correctamente!');
+          alert('¡Cuna Apagada Correctamente!');
         },
         error => {
+          this.isLoading = false; // Detiene la carga
+          this.buttonsDisabled = false; // Habilita los botones nuevamente
           console.error('Error:', error);
   
           if (error.status === 408) {
-            // Si el código de estado es 408, muestra un mensaje de éxito
-            alert('¡Cuna encendida correctamente! (con retraso en la respuesta)');
+            alert('¡Cuna encendida correctamente!)');
           } else if (error.error && error.error.message) {
-            // Muestra el mensaje de error específico retornado por el backend
             alert('Error realizando la acción: ' + error.error.message);
           } else {
-            // Muestra un mensaje genérico si no hay un mensaje de error específico
             alert('Error realizando la acción: Verifica que la cuna esté recibiendo corriente y esté prendida');
           }
         }
