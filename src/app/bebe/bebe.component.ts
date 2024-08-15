@@ -34,6 +34,9 @@ export class BebeComponent implements OnInit {
       AsignarBebe(id: number) {
     this.router.navigate(['/asignarbebe', id]);
   }
+  DatosBebe(id: number) {
+    this.router.navigate(['/datosbebe', id]);
+  }
   AgregarBebe() {
     this.router.navigate(['/createbebe']); // Asegúrate de que '/add-cuna' sea la ruta correcta
   }

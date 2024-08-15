@@ -29,7 +29,6 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
 import { EditTicketComponent } from './edit-ticket/edit-ticket.component';
 import { AsignarBebeComponent } from './asignar-bebe/asignar-bebe.component';
 import { RegisterComponent } from './register/register.component';
-import { LogsComponent } from './logs/logs.component';
 
 
 const routes: Routes = [
@@ -107,9 +106,9 @@ const routes: Routes = [
     { path: 'asignarbebe/:id', component: AsignarBebeComponent,
       canActivate: [AuthRoleGuard],
       data: { roles: [3] } },
-  { path: 'logs', component: LogsComponent,
-     canActivate: [AuthRoleGuard], 
-     data: { roles: [1] }},
+
+
+
     {path: '**', redirectTo: '/login'}
 ];
 

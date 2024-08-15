@@ -84,6 +84,14 @@ getHistorial(cunaId: string,token:string): Observable<any[]> {
 
   return this.http.post<any[]>(`${this.apiUrl}/getAllData`, { cuna_id: cunaId }, { headers });
 }
+getDatosBebe(BebeId: string,token:string): Observable<any[]> {
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.post<any[]>(`${this.apiUrl}/getBabyData`, {bebeId: BebeId }, { headers });
+}
 getDataByCuna(cunaId: string, fechaInicio: string, fechaFin: string, token: string): Observable<any[]> {
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${token}`,

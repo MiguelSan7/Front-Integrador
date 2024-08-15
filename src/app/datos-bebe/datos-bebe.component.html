@@ -1,0 +1,38 @@
+<app-navbar-user></app-navbar-user>
+<div class="bg-pink-100 min-h-screen p-4">
+    <button routerLink="/bebes" class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600 " style="padding: 10px,10px,10px,10px;">
+        Regresar
+     </button>
+  <div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Historial de Datos</h1>
+
+
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No.serie</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sensor</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unidad</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dato</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha y Hora</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let item of paginatedHistorial">
+            <td class="px-6 py-4 whitespace-nowrap">{{ item.infoSensor.deviceID }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ item.infoSensor.IdSensor }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ item.infoSensor.descripcion }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ item.infoSensor.unidad }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ item.infoSensor.data[0].data }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{ item.infoSensor.data[0].datetime | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="mt-4 flex justify-between">
+      <button (click)="prevPage()" [disabled]="currentPage === 1" class="px-4 py-2 bg-gray-500 text-white rounded">Anterior</button>
+      <button (click)="nextPage()" [disabled]="(currentPage * itemsPerPage) >= totalItems" class="px-4 py-2 bg-gray-500 text-white rounded">Siguiente</button>
+    </div>
+  </div>
+</div>
