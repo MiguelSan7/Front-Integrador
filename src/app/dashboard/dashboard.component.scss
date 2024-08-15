@@ -2,35 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Animación del gradiente que se mueve */
 @keyframes gradient-text {
   0% {
     background-position: 0% 50%;
   }
-  100% {
+  50% {
     background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
+/* Aplicación del gradiente animado al texto */
 .gradient-text {
-  background: linear-gradient(45deg, #6b72ff, #94a6f7, #d2ff1e, #e3f899);
+  background: linear-gradient(270deg, #6b72ff, #94a6f7, #d2ff1e, #e3f899, #6b72ff);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  background-size: 400% 400%;
-  animation: gradient-text 3s ease infinite;
+  background-size: 500% 500%;
+  animation: gradient-text 8s ease infinite;
 }
 
+/* Animación de desvanecimiento con desplazamiento */
 @keyframes fade-up {
-  from {
+  0% {
     opacity: 0;
     transform: translateY(20px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+/* Aplicación de la animación de bienvenida */
 .animate-welcome {
-  animation: fade-up 1.5s ease-out;
+  animation: fade-up 2s ease-out;
 }
